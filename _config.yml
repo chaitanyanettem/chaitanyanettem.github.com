@@ -7,7 +7,7 @@ baseurl:     ""
 url:         "http://blog.chaitanya.im"
 
 # Google analytics
-google_analytics:
+google_analytics: UA-60438582-1
 
 # Optional features
 animated:           false
