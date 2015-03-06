@@ -1,0 +1,39 @@
+# Site settings
+title:       Chaitanya Nettem
+email:       chaitanyanettem@gmail.com
+author:      Chaitanya Nettem
+description: "Don't Panic"
+baseurl:     "."
+url:         "http://blog.chaitanya.im"
+
+# Google analytics
+google_analytics:
+
+# Optional features
+animated:           false
+show_related_posts: false
+show_post_footers:  false
+
+# Disqus post comments
+# (leave blank to disable Disqus)
+disqus_shortname:
+
+# Social icons
+show_social_icons: true
+github_username: chaitanyanettem
+stackoverflow_id: 1055475
+twitter_username: 
+google_plus_id:
+linkedin_username: cnettem
+bitcoin_url:
+paypal_url:
+flattr_button:
+
+# Build settings
+markdown:     redcarpet
+redcarpet:
+  extensions: ['smart', 'tables', 'with_toc_data']
+permalink:    pretty
+paginate:     3
+sass:
+  compressed: true

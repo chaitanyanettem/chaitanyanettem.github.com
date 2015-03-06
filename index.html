@@ -1,53 +1,20 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+---
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Repositories : " />
+<div class="home">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <div class="posts">
+    {% for post in paginator.posts %}
+      <div class="post">
+        <a href="{{ post.url | prepend: site.baseurl }}" class="post-link">
+          <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
+          <h3 class="h2 post-title">{{ post.title }}</h3>
+          <p class="post-summary">{{ post.summary }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 
-    <title>Repositories</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/chaitanyanettem">View on GitHub</a>
-
-          <h1 id="project_title">Repositories</h1>
-          <h2 id="project_tagline"></h2>
-
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>Hi! I am Chaitanya Nettem. You have reached my repository listing page.</p>
-
-<hr><p>My repositories are -</p>
-
-<ul>
-<li><a href="https://github.com/chaitanyanettem/algo-implement">Algorithms</a></li>
-<li><a href="https://github.com/chaitanyanettem/code-droppings">Miscellaneous Code</a></li>
-<li><a href="https://github.com/chaitanyanettem/opengl-mini-project">OpenGL Mini Project</a></li>
-<li><a href="https://github.com/chaitanyanettem/graphics-scribbles">Graphics-Scribbles</a></li>
-</ul><hr><p>I am a final year BE(CS) student in Bangalore. I can be reached at chaitanyanettem [at] gmail [dot] com.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
-</html>
+  {% include pagination.html %}
+</div>
