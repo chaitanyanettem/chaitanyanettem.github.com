@@ -95,7 +95,7 @@ strong, .bold {
   text-align: right; }
 
 .measure {
-  max-width: 48rem; }
+  max-width: 52rem; }
 
 .measure-narrow {
   max-width: 32rem; }
@@ -598,6 +598,13 @@ a:hover {
 .rounded {
   border-radius: .25rem; }
 
+.rounded-para {
+  border-radius: .25rem;
+  padding-top: 1rem;
+  padding-bottom: 0.4rem;
+  padding-right: 1rem;
+  padding-left: 1rem; }
+
 .transition-all {
   transition: all .2s ease; }
 
@@ -900,21 +907,19 @@ h6,
   .p,
   p,
   li {
-    font-size: 1.25rem;
-    line-height: 1.8; }
+    font-size: 1.1rem;
+    line-height: 1.5; }
 
   .small {
-    font-size: 1rem; }
+    font-size: 0.75rem; }
 
   table {
-    font-size: 1.25rem; }
+    font-size: 1rem; }
 
   .post-link .post-title {
     margin-top: 0.5em; }
 
   .posts .post {
-    margin-bottom: 1.333em;
-    padding-bottom: 0.666em;
     border-bottom: thin solid #f3f3f3; }
 
   .posts .post:last-child {
