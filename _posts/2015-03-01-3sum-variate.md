@@ -13,7 +13,7 @@ The 3-Sum is a popular programming puzzle and is presented to people in many dif
 
 The question is thus:
 
-<div class="bg-light-gray rounded-para" style="font-family: Courier">
+<div class="bg-off-white rounded-para" style="font-family: Courier">
 
 <p>Given an array of integers, find two numbers such that they add up to a specific target number.</p>
 

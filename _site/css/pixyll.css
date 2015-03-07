@@ -501,6 +501,9 @@ strong, .bold {
 .bg-white {
   background-color: #fff; }
 
+.bg-off-white {
+  background-color: #f5f2ee; }
+
 .bg-blue {
   background-color: #0096cc; }
 
@@ -622,7 +625,7 @@ a:hover {
 
 */
 body {
-  font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", serif; }
+  font-family: "Georgia","Times New Roman",Times,serif; }
 
 html, body {
   height: 100%; }
@@ -657,14 +660,17 @@ body {
 
 .site-header a {
   color: #333;
+  font-size: 1.8rem;
   font-weight: 300; }
 
 .site-header nav a {
-  font-size: 1rem;
-  color: #666; }
+  font-family: "Merriweather";
+  font-size: 1.3rem;
+  color: #333; }
 
 .site-header nav a:hover {
   color: #444;
+  background-color: #eeeeee;
   opacity: 1;
   border-bottom: 2px solid #444; }
 
@@ -859,7 +865,7 @@ h6,
   font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
   font-weight: 900;
   line-height: 1.2;
-  margin: 1em 0 0.5em; }
+  margin: 0em 0 0.5em; }
 
 .social-icons {
   padding: 0.5em 0 0 0;
@@ -880,7 +886,8 @@ h6,
 
 @media screen and (min-width: 48em) {
   .site-header .site-title {
-    float: left; }
+    float: left;
+    font-family: Merriweather; }
 
   .meta,
   .post-meta {
@@ -920,6 +927,8 @@ h6,
     margin-top: 0.5em; }
 
   .posts .post {
+    margin-bottom: 1.333em;
+    padding-bottom: 0.666em;
     border-bottom: thin solid #f3f3f3; }
 
   .posts .post:last-child {

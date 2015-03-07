@@ -14,7 +14,7 @@
 
 &lt;p&gt;The question is thus:&lt;/p&gt;
 
-&lt;div class=&quot;bg-light-gray rounded-para&quot; style=&quot;font-family: Courier&quot;&gt;
+&lt;div class=&quot;bg-off-white rounded-para&quot; style=&quot;font-family: Courier&quot;&gt;
 
 &lt;p&gt;Given an array of integers, find two numbers such that they add up to a specific target number.&lt;/p&gt;
 
@@ -78,8 +78,8 @@ Here you have an array of numbers and you have to find out if any two of them su
       </item>
     
       <item>
-        <title>A (small) critique</title>
-        <description>&lt;p&gt;I explored the Clever API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.&lt;/p&gt;
+        <title>A (small) critique of Clever's API</title>
+        <description>&lt;p&gt;I explored &lt;a href=&quot;https://clever.com/developers/docs&quot;&gt;Clever&amp;rsquo;s&lt;/a&gt; API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.&lt;/p&gt;
 
 &lt;p&gt;There are 6 kinds of resources that can be accessed using the API - Students, Teachers, Schools, Districts, Sections, Events.&lt;/p&gt;
 
