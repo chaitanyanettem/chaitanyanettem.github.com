@@ -642,9 +642,9 @@ img {
   content: "";
   display: block; }
 
-.footer, .site-wrap:after {
-  height: 120px; }
-
+/*.footer, .site-wrap:after {
+  height: 120px;
+}*/
 body {
   font-size: 1.5rem;
   box-sizing: border-box;
@@ -997,7 +997,6 @@ h6,
     margin-top: .125em; }
 
   .posts .post {
-    margin-bottom: 2.666em;
     padding-bottom: 1.333em;
     border-bottom: thin solid #f3f3f3; }
 
