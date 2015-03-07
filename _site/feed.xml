@@ -14,7 +14,7 @@
 
 &lt;p&gt;The question is thus:&lt;/p&gt;
 
-&lt;div class=&quot;bg-light-gray rounded-para&quot;&gt;
+&lt;div class=&quot;bg-light-gray rounded-para&quot; style=&quot;font-family: Courier&quot;&gt;
 
 &lt;p&gt;Given an array of integers, find two numbers such that they add up to a specific target number.&lt;/p&gt;
 
