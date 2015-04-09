@@ -4,7 +4,7 @@ title: Passwordless SSH
 date: 2014-02-24 09:23
 permalink: passwordless-ssh
 summary: A tutorial on ssh-keygen
-categories: api review
+categories: tutorial ssh
 ---
 
 If you're anything like me then you constantly have to SSH into other machines to do various things ranging from website maintenance to development to homework submission. Mostly you're SSHing into the same 3-4 machines. Entering passwords again and again is a pain when you are doing that.

@@ -4,7 +4,7 @@ title: A (small) critique of Clever's API
 date: 2014-05-02 14:53
 permalink: a-critique-of-the-design-of-the-clever-api
 summary: I explored Clever's API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.
-categories: api review
+categories: api review clever
 ---
 
 I explored [Clever's](https://clever.com/developers/docs) API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.

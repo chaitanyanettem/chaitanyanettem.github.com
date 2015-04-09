@@ -4,7 +4,7 @@ title: 3-Sum and its myriad avatars
 date: 2015-03-01 12:20
 permalink: 3sum-variate
 summary: The 3-Sum is a popular programming puzzle and is presented to people in many different forms.
-categories: interview-prep
+categories: interview_prep
 ---
 
 The 3-Sum is a popular programming puzzle and is presented to people in many different forms. Here I will endeavor to dissect its more popular versions.

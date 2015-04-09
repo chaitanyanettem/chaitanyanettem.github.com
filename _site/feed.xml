@@ -7,6 +7,15 @@
     <atom:link href="http://blog.chaitanya.im/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Hacker News Chrome Extension</title>
+        <description>&lt;p&gt;So I have an idea for a chrome extension &lt;em&gt;a la&lt;/em&gt; &lt;a href=&quot;https://chrome.google.com/webstore/detail/ldocbjabkdopnncieelmeokoigpnnilb&quot;&gt;Reddit Anywhere&lt;/a&gt;. I&amp;rsquo;ll use the Algolia API for HN search and it should be pretty straight forward. I hope to have something running in an hour or two!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 09 Apr 2015 17:17:00 -0400</pubDate>
+        <link>http://blog.chaitanya.im/check-hn-crx</link>
+        <guid isPermaLink="true">http://blog.chaitanya.im/check-hn-crx</guid>
+      </item>
+    
+      <item>
         <title>3-Sum and its myriad avatars</title>
         <description>&lt;p&gt;The 3-Sum is a popular programming puzzle and is presented to people in many different forms. Here I will endeavor to dissect its more popular versions.&lt;/p&gt;
 
