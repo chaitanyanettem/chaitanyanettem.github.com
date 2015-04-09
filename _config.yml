@@ -11,7 +11,7 @@ google_analytics: UA-60438582-1
 
 # Optional features
 animated:           false
-show_related_posts: true
+show_related_posts: false
 show_post_footers:  false
 
 # Disqus post comments
@@ -22,7 +22,7 @@ disqus_shortname:
 show_social_icons: true
 github_username: chaitanyanettem
 stackoverflow_id: 1055475
-twitter_username: 
+twitter_username:
 google_plus_id:
 linkedin_username: cnettem
 bitcoin_url:
