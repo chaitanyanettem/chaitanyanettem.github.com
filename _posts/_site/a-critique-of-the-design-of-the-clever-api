@@ -1,0 +1,38 @@
+<p>I explored <a href="https://clever.com/developers/docs">Clever’s</a> API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.</p>
+
+<p>There are 6 kinds of resources that can be accessed using the API - Students, Teachers, Schools, Districts, Sections, Events.</p>
+
+<p>I found that the API supported two verbs GET and PUT. The API is simple enough that a request is very easy to construct. This is the general structure of a request, which when called returns a JSON object: <span class="bg-orange"><code>/{version-number}/{resource-name}/{id}/{sub-resource}</code></span></p>
+
+<p>So, if you wanted a list of all the students you have access to across all districts you would call - <span class="bg-orange"><code>/v1.1/students</code></span>. And if you wanted a list of all the students that a particular teacher taught you would call - <span class="bg-orange"><code>/v1.1/teachers/{teacher-id}/students</code></span></p>
+
+<h3 id="design-issue">Design Issue</h3>
+
+<p>If there was one thing I found a little puzzling then that would be design of the returned JSON object. For instance in response to <span class="bg-orange"><code>/v1.1/students</code></span> the first field of the data structure is the <span class="bg-orange"><code>paging</code></span> field which contains info about how many pages of data the response has.</p>
+
+<p>The second field is the <span class="bg-orange"><code>data</code></span> field which contains an array of dictionaries which contain the information about students. Each dictionary key within this array is also called <span class="bg-orange"><code>data</code></span>:</p>
+
+<p><code>
+{
+      "paging": {
+          ...
+      },
+      "data": [                            //&lt;-- These two fields
+         {                                    
+              "data": {                    //&lt;-- are named the same.
+                ...
+              },
+              "uri": "..."
+         },
+         {
+              "data": {
+                ...
+              },
+              "uri": "..."
+         },
+        .
+        .
+        .       
+</code></p>
+
+<p>Which seems like a missed opportunity. The names of the dictionary keys within the array could have been something else which conveyed some information about the values of those keys.</p>
