@@ -7,7 +7,7 @@ summary: A post on how I go about scraping the Class XII results from CBSE's res
 categories: python scraping
 ---
 
-So a couple of days ago [Avinash](avi.im) mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das's excellent [post](https://deedy.quora.com/Hacking-into-the-Indian-Education-System) from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.
+So a couple of days ago [Avinash](http://avi.im) mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das's excellent [post](https://deedy.quora.com/Hacking-into-the-Indian-Education-System) from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.
 
 ###Initial impressions of the website
 The results page [here](http://cbseresults.nic.in/class12/cbse122015_all.htm) hadn't changed at all since 2009 when ***I*** checked my class 12 results. There's of course absolutely no authentication. Having been told about the roll number ranges by Avinash, I tried a couple of inputs to check what the parameters of the post request are. There is also a roll number validator in the Javascript of that page so its not very difficult to decipher what all the valid roll numbers are.
