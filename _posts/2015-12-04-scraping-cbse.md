@@ -21,17 +21,17 @@ There are 2 parameters of the post request:
 Trying a simple post request with curl without setting any of the headers failed with the site reporting ***"Access denied, pl. click here to visit the site"***. To avoid that I tried doing the same by copying the entire post request using Chrome DevTools. And of course it worked that way. These were the headers used:
 
 ```
-'Origin: http://cbseresults.nic.in'
-'Accept-Encoding: gzip, deflate'
-'Accept-Language: en-US,en;q=0.8'
-'Upgrade-Insecure-Requests: 1'
-'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36'
-'Content-Type: application/x-www-form-urlencoded'
-'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-'Cache-Control: max-age=0'
-'Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm'
-'Connection: keep-alive'
-'DNT: 1'
+Origin: http://cbseresults.nic.in
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Cache-Control: max-age=0
+Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm
+Connection: keep-alive
+DNT: 1
 ```
 
 Presumably, they were checking for the presence of the Referer header but I didn't spend time trying to find that out.
