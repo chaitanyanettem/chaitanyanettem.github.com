@@ -7,6 +7,45 @@
     <atom:link href="http://blog.chaitanya.im/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Scraping CBSE Class XII results for fun and profit</title>
+        <description>&lt;p&gt;So a couple of days ago &lt;a href=&quot;avi.im&quot;&gt;Avinash&lt;/a&gt; mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das&amp;rsquo;s excellent &lt;a href=&quot;https://deedy.quora.com/Hacking-into-the-Indian-Education-System&quot;&gt;post&lt;/a&gt; from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.&lt;/p&gt;
+
+&lt;h3 id=&quot;initial-impressions-of-the-website&quot;&gt;Initial impressions of the website&lt;/h3&gt;
+
+&lt;p&gt;The results page &lt;a href=&quot;http://cbseresults.nic.in/class12/cbse122015_all.htm&quot;&gt;here&lt;/a&gt; hadn&amp;rsquo;t changed at all since 2009 when &lt;strong&gt;&lt;em&gt;I&lt;/em&gt;&lt;/strong&gt; checked my class 12 results. There&amp;rsquo;s of course absolutely no authentication. Having been told about the roll number ranges by Avinash, I tried a couple of inputs to check what the parameters of the post request are. There is also a roll number validator in the Javascript of that page so its not very difficult to decipher what all the valid roll numbers are.&lt;/p&gt;
+
+&lt;p&gt;There are 2 parameters of the post request:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;regno (which is the roll number you give as input)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;B1 (which I presume specifies the button name and is always equal to &amp;ldquo;Submit&amp;rdquo;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Trying a simple post request with curl without setting any of the headers failed with the site reporting &lt;strong&gt;&lt;em&gt;&amp;ldquo;Access denied, pl. click here to visit the site&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;. To avoid that I tried doing the same by copying the entire post request using Chrome DevTools. And of course it worked that way. These were the headers used:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;&#39;Origin: http://cbseresults.nic.in&#39;
+&#39;Accept-Encoding: gzip, deflate&#39;
+&#39;Accept-Language: en-US,en;q=0.8&#39;
+&#39;Upgrade-Insecure-Requests: 1&#39;
+&#39;User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36&#39;
+&#39;Content-Type: application/x-www-form-urlencoded&#39;
+&#39;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#39;
+&#39;Cache-Control: max-age=0&#39;
+&#39;Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm&#39;
+&#39;Connection: keep-alive&#39;
+&#39;DNT: 1&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Presumably, they were checking for the presence of the Referer header but I didn&amp;rsquo;t spend time trying to find that out.&lt;/p&gt;
+
+&lt;h3 id=&quot;tools-for-the-job&quot;&gt;Tools for the job&lt;/h3&gt;
+
+&lt;p&gt;Python was of course the language to be used. I decided against using Scrapy. Instead I decided to go with asyncio, BeautifulSoup4 and roll my own scraper. I&amp;rsquo;ve been wanting to take a look at asyncio for some time now and haven&amp;rsquo;t had the opportunity to use it on anything. I glanced through the post &lt;a href=&quot;http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html&quot;&gt;here&lt;/a&gt; by Guido Van Rossum before proceeding (great post if any one wants to get into web scraping with Python).&lt;/p&gt;
+</description>
+        <pubDate>Fri, 04 Dec 2015 01:23:00 +0530</pubDate>
+        <link>http://blog.chaitanya.im/scraping-cbse</link>
+        <guid isPermaLink="true">http://blog.chaitanya.im/scraping-cbse</guid>
+      </item>
+    
+      <item>
         <title>3-Sum and its myriad avatars</title>
         <description>&lt;p&gt;The 3-Sum is a popular programming puzzle and is presented to people in many different forms. Here I will endeavor to dissect its more popular versions.&lt;/p&gt;
 
@@ -75,14 +114,6 @@ public:
         <pubDate>Sun, 01 Mar 2015 12:20:00 +0530</pubDate>
         <link>http://blog.chaitanya.im/3sum-variate</link>
         <guid isPermaLink="true">http://blog.chaitanya.im/3sum-variate</guid>
-      </item>
-    
-      <item>
-        <title>Understanding RecyclerView - Part 1</title>
-        <description></description>
-        <pubDate>Sun, 30 Nov 2014 17:22:00 +0530</pubDate>
-        <link>http://blog.chaitanya.im/recyclerview-1</link>
-        <guid isPermaLink="true">http://blog.chaitanya.im/recyclerview-1</guid>
       </item>
     
       <item>
