@@ -3,7 +3,7 @@ layout: post
 title: Scraping CBSE Class XII results for fun and profit
 date: 2015-12-04 01:23
 permalink: scraping-cbse
-summary: A post on how I go about scraping the Class XII results from CBSE's results website using Python and asyncio
+summary: A post on how I go about scraping the Class XII results from CBSE's results website using Python and asyncio.
 categories: python scraping
 ---
 
