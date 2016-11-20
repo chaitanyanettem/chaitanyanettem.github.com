@@ -2,43 +2,121 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chaitanya Nettem</title>
-    <description>Don&#39;t Panic</description>
+    <description>Don't Panic</description>
     <link>http://blog.chaitanya.im/</link>
     <atom:link href="http://blog.chaitanya.im/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Why is there a 4096 character limit on text input in the shell</title>
+        <description>&lt;p&gt;The other day I had just started working on puzzles in &lt;a href=&quot;adventofcode.com&quot;&gt;Advent of Code&lt;/a&gt; after seeing it on HackerNews (The puzzles are fun. You should definitely try them out). The first half of the first problem was very easy and so I finished it in less than 5 minutes. Only to find out that my program was generating the wrong solution for the given input. I was confounded. There was nothing logically wrong with it. &lt;a href=&quot;http://adventofcode.com/day/1&quot;&gt;This&lt;/a&gt; was the problem and the solution looked like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;day_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;floor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calculate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;floor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;floor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Enter input string: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;day_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calculate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As you can see the program is pretty simple; it reads an input string from the commandline and processes the string. On checking the size of the input string in the program, I found that its size was 4095 characters. Comparing that to the actual input string from the website I found that &lt;em&gt;its&lt;/em&gt; size was some 7000 odd characters. The reason for this discrepancy as I later found out is that the Linux commandline (and I believe all POSIX compliant commandlines) can take upto 4096 characters of input (4kB) only.&lt;/p&gt;
+
+&lt;p&gt;If you just want to know what the solution to this problem is then here it is. There are two options:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Read from a file instead of taking input from the command line.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Or&lt;/em&gt; enter the command &lt;code class=&quot;highlighter-rouge&quot;&gt;stty -icanon&lt;/code&gt; before starting your program. This will change the input mode to &lt;code class=&quot;highlighter-rouge&quot;&gt;noncanonical&lt;/code&gt; mode which allows your inputs to be as big as you want. Be aware that this will remove all text processing capabilities from commandline input. I.e. you won’t be able to use your arrow keys, backspace, delete, ability to end input using ctrl-D etc. &lt;code class=&quot;highlighter-rouge&quot;&gt;stty icannon&lt;/code&gt; will revert the input to &lt;code class=&quot;highlighter-rouge&quot;&gt;canonical&lt;/code&gt; mode.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you’re now wondering what canonical and non-canonical mean then read on.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-canonical-mode-why-does-it-limit-the-input-size&quot;&gt;What is canonical mode? Why does it limit the input size?&lt;/h3&gt;
+
+&lt;p&gt;How the data input in the terminal by the user is provided to a process depends on whether the terminal is in the canonical or non-canonical mode.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In Canonical mode the terminal provides basic text processing abilities on input: You can navigate inside the input buffer using arrow keys; erase, delete, EOF signals are captured and applicable text processing is performed. Text is passed to the process only when a new line is encountered or when the buffer is full. The size of the buffer is usually 4096 and &lt;strong&gt;this&lt;/strong&gt; is why the input size is limited. As mentioned above you can switch from canonical to non-canonical mode using &lt;code class=&quot;highlighter-rouge&quot;&gt;stty -icanon&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Non-Canonical mode has none of these text-processing capabilities. I.e if you wanted to implement a commandline tool like cat and you wanted it to operate in a non-canonical environment you’d have to implement some of these capabilities yourself within your program. You can switch back to canonical mode using &lt;code class=&quot;highlighter-rouge&quot;&gt;stty icanon&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More info is available here:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_05&quot;&gt;The Open Group Base Specifications Issue 7 - General Terminal Interface&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/131105/how-to-read-over-4k-input-without-new-lines-on-a-terminal&quot;&gt;This unix.stackexchange question&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Also, you can see the actual buffer size defined &lt;a href=&quot;http://lxr.free-electrons.com/source/include/linux/tty.h?v=4.3#L308&quot;&gt;here&lt;/a&gt; (on line #308)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 06 Dec 2015 15:41:00 +0530</pubDate>
+        <link>http://blog.chaitanya.im/4096-limit</link>
+        <guid isPermaLink="true">http://blog.chaitanya.im/4096-limit</guid>
+      </item>
+    
+      <item>
         <title>Scraping CBSE Class XII results for fun and profit</title>
-        <description>&lt;p&gt;So a couple of days ago &lt;a href=&quot;avi.im&quot;&gt;Avinash&lt;/a&gt; mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das&amp;rsquo;s excellent &lt;a href=&quot;https://deedy.quora.com/Hacking-into-the-Indian-Education-System&quot;&gt;post&lt;/a&gt; from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.&lt;/p&gt;
+        <description>&lt;p&gt;So a couple of days ago &lt;a href=&quot;http://avi.im&quot;&gt;Avinash&lt;/a&gt; mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das’s excellent &lt;a href=&quot;https://deedy.quora.com/Hacking-into-the-Indian-Education-System&quot;&gt;post&lt;/a&gt; from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.&lt;/p&gt;
 
-&lt;h3 id=&quot;initial-impressions-of-the-website&quot;&gt;Initial impressions of the website&lt;/h3&gt;
-
-&lt;p&gt;The results page &lt;a href=&quot;http://cbseresults.nic.in/class12/cbse122015_all.htm&quot;&gt;here&lt;/a&gt; hadn&amp;rsquo;t changed at all since 2009 when &lt;strong&gt;&lt;em&gt;I&lt;/em&gt;&lt;/strong&gt; checked my class 12 results. There&amp;rsquo;s of course absolutely no authentication. Having been told about the roll number ranges by Avinash, I tried a couple of inputs to check what the parameters of the post request are. There is also a roll number validator in the Javascript of that page so its not very difficult to decipher what all the valid roll numbers are.&lt;/p&gt;
+&lt;p&gt;###Initial impressions of the website
+The results page &lt;a href=&quot;http://cbseresults.nic.in/class12/cbse122015_all.htm&quot;&gt;here&lt;/a&gt; hadn’t changed at all since 2009 when &lt;strong&gt;&lt;em&gt;I&lt;/em&gt;&lt;/strong&gt; checked my class 12 results. There’s of course absolutely no authentication. Having been told about the roll number ranges by Avinash, I tried a couple of inputs to check what the parameters of the post request are. There is also a roll number validator in the Javascript of that page so its not very difficult to decipher what all the valid roll numbers are.&lt;/p&gt;
 
 &lt;p&gt;There are 2 parameters of the post request:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;regno (which is the roll number you give as input)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;B1 (which I presume specifies the button name and is always equal to &amp;ldquo;Submit&amp;rdquo;)&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;regno (which is the roll number you give as input)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;B1 (which I presume specifies the button name and is always equal to “Submit”)&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Trying a simple post request with curl without setting any of the headers failed with the site reporting &lt;strong&gt;&lt;em&gt;&amp;ldquo;Access denied, pl. click here to visit the site&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;. To avoid that I tried doing the same by copying the entire post request using Chrome DevTools. And of course it worked that way. These were the headers used:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;&#39;Origin: http://cbseresults.nic.in&#39;
-&#39;Accept-Encoding: gzip, deflate&#39;
-&#39;Accept-Language: en-US,en;q=0.8&#39;
-&#39;Upgrade-Insecure-Requests: 1&#39;
-&#39;User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36&#39;
-&#39;Content-Type: application/x-www-form-urlencoded&#39;
-&#39;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#39;
-&#39;Cache-Control: max-age=0&#39;
-&#39;Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm&#39;
-&#39;Connection: keep-alive&#39;
-&#39;DNT: 1&#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Presumably, they were checking for the presence of the Referer header but I didn&amp;rsquo;t spend time trying to find that out.&lt;/p&gt;
+&lt;p&gt;Trying a simple post request with curl without setting any of the headers failed with the site reporting &lt;strong&gt;&lt;em&gt;“Access denied, pl. click here to visit the site”&lt;/em&gt;&lt;/strong&gt;. To avoid that I tried doing the same by copying the entire post request using Chrome DevTools. And of course it worked that way. These were the headers used:&lt;/p&gt;
 
-&lt;h3 id=&quot;tools-for-the-job&quot;&gt;Tools for the job&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Origin: http://cbseresults.nic.in
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Cache-Control: max-age=0
+Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm
+Connection: keep-alive
+DNT: 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;Python was of course the language to be used. I decided against using Scrapy. Instead I decided to go with asyncio, BeautifulSoup4 and roll my own scraper. I&amp;rsquo;ve been wanting to take a look at asyncio for some time now and haven&amp;rsquo;t had the opportunity to use it on anything. I glanced through the post &lt;a href=&quot;http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html&quot;&gt;here&lt;/a&gt; by Guido Van Rossum before proceeding (great post if any one wants to get into web scraping with Python).&lt;/p&gt;
+&lt;p&gt;Presumably, they were checking for the presence of the Referer header but I didn’t spend time trying to find that out.&lt;/p&gt;
+
+&lt;p&gt;###Tools for the job
+Python was of course the language to be used. I decided against using Scrapy. Instead I decided to go with asyncio, BeautifulSoup4 and roll my own scraper. I’ve been wanting to take a look at asyncio for some time now and haven’t had the opportunity to use it on anything. I glanced through the post &lt;a href=&quot;http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html&quot;&gt;here&lt;/a&gt; by Guido Van Rossum before proceeding (great post if any one wants to get into web scraping with Python).&lt;/p&gt;
 </description>
         <pubDate>Fri, 04 Dec 2015 01:23:00 +0530</pubDate>
         <link>http://blog.chaitanya.im/scraping-cbse</link>
@@ -49,7 +127,7 @@
         <title>3-Sum and its myriad avatars</title>
         <description>&lt;p&gt;The 3-Sum is a popular programming puzzle and is presented to people in many different forms. Here I will endeavor to dissect its more popular versions.&lt;/p&gt;
 
-&lt;h3 id=&quot;let-39-s-start-with-the-2-sum&quot;&gt;Let&amp;rsquo;s start with the 2-Sum&lt;/h3&gt;
+&lt;p&gt;###Let’s start with the 2-Sum&lt;/p&gt;
 
 &lt;p&gt;The question is thus:&lt;/p&gt;
 
@@ -66,9 +144,10 @@
 &lt;p&gt;Output: index1 = 1, index2 = 2&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;br/&gt;
+&lt;p&gt;&lt;br /&gt;
 Here you have an array of numbers and you have to find out if any two of them sum to a given target number. The most obvious way to solve it is to brute force your way to sum all possible combinations:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-C++&quot; data-lang=&quot;C++&quot;&gt;class Solution {
+
+&lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;class Solution {
 public:
     vector&amp;lt;int&amp;gt; twoSum(vector&amp;lt;int&amp;gt; &amp;amp;numbers, int target) {
         vector&amp;lt;int&amp;gt; solution;
@@ -81,16 +160,18 @@ public:
                 }
     }
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Obviously we can do better than that in terms of time. A better way is to use a hashtable/map. (This is something a professor once told me: When in doubt use a hashtable :).&lt;/p&gt;
 
 &lt;p&gt;So, we can use a C++ map to store each number in the map when we first encounter it. Simultaneously we can check if the target minus that number already exists in the map. If it does, bingo!&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-C++&quot; data-lang=&quot;C++&quot;&gt;class Solution {
+
+&lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;class Solution {
 public:
     vector&amp;lt;int&amp;gt; twoSum(vector&amp;lt;int&amp;gt; &amp;amp;numbers, int target) {
         map&amp;lt;int, int&amp;gt; hash;
         vector&amp;lt;int&amp;gt; result;
-
+        
         for (int i=0; i&amp;lt;numbers.size(); i++) {
             if (hash.find(target - numbers[i]) != hash.end()) {
                 if (i + 1&amp;lt; hash[target - numbers[i]]) {
@@ -108,8 +189,9 @@ public:
         return result;
     }
 };
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To be continued…&lt;/p&gt;
+
 </description>
         <pubDate>Sun, 01 Mar 2015 12:20:00 +0530</pubDate>
         <link>http://blog.chaitanya.im/3sum-variate</link>
@@ -117,21 +199,22 @@ public:
       </item>
     
       <item>
-        <title>A (small) critique of Clever&#39;s API</title>
-        <description>&lt;p&gt;I explored &lt;a href=&quot;https://clever.com/developers/docs&quot;&gt;Clever&amp;rsquo;s&lt;/a&gt; API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.&lt;/p&gt;
+        <title>A (small) critique of Clever's API</title>
+        <description>&lt;p&gt;I explored &lt;a href=&quot;https://clever.com/developers/docs&quot;&gt;Clever’s&lt;/a&gt; API recently while applying for an internship position at the company and I liked how clean, self contained and comprehensive it is.&lt;/p&gt;
 
 &lt;p&gt;There are 6 kinds of resources that can be accessed using the API - Students, Teachers, Schools, Districts, Sections, Events.&lt;/p&gt;
 
-&lt;p&gt;I found that the API supported two verbs GET and PUT. The API is simple enough that a request is very easy to construct. This is the general structure of a request, which when called returns a JSON object: &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;/{version-number}/{resource-name}/{id}/{sub-resource}&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;I found that the API supported two verbs GET and PUT. The API is simple enough that a request is very easy to construct. This is the general structure of a request, which when called returns a JSON object: &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/{version-number}/{resource-name}/{id}/{sub-resource}&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
 
-&lt;p&gt;So, if you wanted a list of all the students you have access to across all districts you would call - &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;/v1.1/students&lt;/code&gt;&lt;/span&gt;. And if you wanted a list of all the students that a particular teacher taught you would call - &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;/v1.1/teachers/{teacher-id}/students&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;So, if you wanted a list of all the students you have access to across all districts you would call - &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/v1.1/students&lt;/code&gt;&lt;/span&gt;. And if you wanted a list of all the students that a particular teacher taught you would call - &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/v1.1/teachers/{teacher-id}/students&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;design-issue&quot;&gt;Design Issue&lt;/h3&gt;
+&lt;p&gt;###Design Issue###&lt;/p&gt;
 
-&lt;p&gt;If there was one thing I found a little puzzling then that would be design of the returned JSON object. For instance in response to &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;/v1.1/students&lt;/code&gt;&lt;/span&gt; the first field of the data structure is the &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;paging&lt;/code&gt;&lt;/span&gt; field which contains info about how many pages of data the response has. &lt;/p&gt;
+&lt;p&gt;If there was one thing I found a little puzzling then that would be design of the returned JSON object. For instance in response to &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/v1.1/students&lt;/code&gt;&lt;/span&gt; the first field of the data structure is the &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;paging&lt;/code&gt;&lt;/span&gt; field which contains info about how many pages of data the response has.&lt;/p&gt;
 
-&lt;p&gt;The second field is the &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;data&lt;/code&gt;&lt;/span&gt; field which contains an array of dictionaries which contain the information about students. Each dictionary key within this array is also called &lt;span class=&quot;bg-orange&quot;&gt;&lt;code&gt;data&lt;/code&gt;&lt;/span&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;p&gt;The second field is the &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt;&lt;/span&gt; field which contains an array of dictionaries which contain the information about students. Each dictionary key within this array is also called &lt;span class=&quot;bg-orange&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt;&lt;/span&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
       &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;paging&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
           &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
       &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -151,7 +234,9 @@ public:
         &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
         &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
         &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Which seems like a missed opportunity. The names of the dictionary keys within the array could have been something else which conveyed some information about the values of those keys.&lt;/p&gt;
 </description>
         <pubDate>Fri, 02 May 2014 14:53:00 +0530</pubDate>
@@ -161,33 +246,45 @@ public:
     
       <item>
         <title>Passwordless SSH</title>
-        <description>&lt;p&gt;If you&amp;rsquo;re anything like me then you constantly have to SSH into other machines to do various things ranging from website maintenance to development to homework submission. Mostly you&amp;rsquo;re SSHing into the same 3-4 machines. Entering passwords again and again is a pain when you are doing that.&lt;/p&gt;
+        <description>&lt;p&gt;If you’re anything like me then you constantly have to SSH into other machines to do various things ranging from website maintenance to development to homework submission. Mostly you’re SSHing into the same 3-4 machines. Entering passwords again and again is a pain when you are doing that.&lt;/p&gt;
 
-&lt;p&gt;Enter ssh-keygen to the rescue. ssh-keygen &amp;lsquo;generates, manages and converts authentication keys for ssh&amp;rsquo;. For the standard usecase of generating a key and using it for sshing into all machines, this is the workflow:&lt;/p&gt;
+&lt;p&gt;Enter ssh-keygen to the rescue. ssh-keygen ‘generates, manages and converts authentication keys for ssh’. For the standard usecase of generating a key and using it for sshing into all machines, this is the workflow:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;You enter ssh-keygen at a prompt and then hit enter for all prompts. &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If ssh-keygen prompts you to confirm overwriting a previously created key then you can go ahead and overwrite it (as long as you know the consequences of overwriting: you will have to enter the passwords again for all the machines that you configured the previous key with). &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If you do overwrite a previously existing key then you might have to run ssh-add to link the key with your user.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You enter ssh-keygen at a prompt and then hit enter for all prompts.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If ssh-keygen prompts you to confirm overwriting a previously created key then you can go ahead and overwrite it (as long as you know the consequences of overwriting: you will have to enter the passwords again for all the machines that you configured the previous key with).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If you do overwrite a previously existing key then you might have to run ssh-add to link the key with your user.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;$ ssh-keygen
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/chaitanya/.ssh/id_rsa):
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 Your identification has been saved in /home/chaitanya/.ssh/id_rsa.
 Your public key has been saved in /home/chaitanya/.ssh/id_rsa.pub.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Next you will copy the generated key to each remote machine like so:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;$ ssh-copy-id &amp;lt;username&amp;gt;@&amp;lt;remote machine&#39;s address&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And you&amp;rsquo;re done. You can now logon to the remote machine without entering a password so long as the key remains unchanged in your home system. &lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh-copy-id &amp;lt;username&amp;gt;@&amp;lt;remote machine's address&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And you’re done. You can now logon to the remote machine without entering a password so long as the key remains unchanged in your home system.&lt;/p&gt;
 
 &lt;p&gt;You should read the following resources for more information:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/1/ssh-keygen&quot;&gt;ssh-keygen man page&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/error-agent-admitted-failure-to-sign&quot;&gt;Common error resolved using ssh-add&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/1/ssh-keygen&quot;&gt;ssh-keygen man page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;[Common error resolved using ssh-add] (https://help.github.com/articles/error-agent-admitted-failure-to-sign)&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 24 Feb 2014 09:23:00 +0530</pubDate>

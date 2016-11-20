@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Scraping CBSE Class XII results for fun and profit &#8211; Chaitanya Nettem</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A post on how I go about scraping the Class XII results from CBSE's results website using Python and asyncio">
+    <meta name="description" content="A post on how I go about scraping the Class XII results from CBSE's results website using Python and asyncio.">
     <meta name="author" content="Chaitanya Nettem">
     <meta name="keywords" content="python, scraping">
     <link rel="canonical" href="http://blog.chaitanya.im/scraping-cbse">
@@ -90,37 +90,42 @@
 </div>
 
 <article class="post-content">
-  <p>So a couple of days ago <a href="avi.im">Avinash</a> mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das&rsquo;s excellent <a href="https://deedy.quora.com/Hacking-into-the-Indian-Education-System">post</a> from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.</p>
+  <p>So a couple of days ago <a href="http://avi.im">Avinash</a> mentioned that he had scraped the 12th standard board results from the CBSE website and it seemed like something I would be interested in doing as well. I remembered Debarghya Das’s excellent <a href="https://deedy.quora.com/Hacking-into-the-Indian-Education-System">post</a> from a couple of years ago about ICSE results and how they seemed very peculiar. Not having seen anyone do something similar for CBSE my curiosity was piqued.</p>
 
-<h3 id="initial-impressions-of-the-website">Initial impressions of the website</h3>
-
-<p>The results page <a href="http://cbseresults.nic.in/class12/cbse122015_all.htm">here</a> hadn&rsquo;t changed at all since 2009 when <strong><em>I</em></strong> checked my class 12 results. There&rsquo;s of course absolutely no authentication. Having been told about the roll number ranges by Avinash, I tried a couple of inputs to check what the parameters of the post request are. There is also a roll number validator in the Javascript of that page so its not very difficult to decipher what all the valid roll numbers are.</p>
+<p>###Initial impressions of the website
+The results page <a href="http://cbseresults.nic.in/class12/cbse122015_all.htm">here</a> hadn’t changed at all since 2009 when <strong><em>I</em></strong> checked my class 12 results. There’s of course absolutely no authentication. Having been told about the roll number ranges by Avinash, I tried a couple of inputs to check what the parameters of the post request are. There is also a roll number validator in the Javascript of that page so its not very difficult to decipher what all the valid roll numbers are.</p>
 
 <p>There are 2 parameters of the post request:</p>
 
 <ul>
-<li><p>regno (which is the roll number you give as input)</p></li>
-<li><p>B1 (which I presume specifies the button name and is always equal to &ldquo;Submit&rdquo;)</p></li>
+  <li>
+    <p>regno (which is the roll number you give as input)</p>
+  </li>
+  <li>
+    <p>B1 (which I presume specifies the button name and is always equal to “Submit”)</p>
+  </li>
 </ul>
 
-<p>Trying a simple post request with curl without setting any of the headers failed with the site reporting <strong><em>&ldquo;Access denied, pl. click here to visit the site&rdquo;</em></strong>. To avoid that I tried doing the same by copying the entire post request using Chrome DevTools. And of course it worked that way. These were the headers used:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">'Origin: http://cbseresults.nic.in'
-'Accept-Encoding: gzip, deflate'
-'Accept-Language: en-US,en;q=0.8'
-'Upgrade-Insecure-Requests: 1'
-'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36'
-'Content-Type: application/x-www-form-urlencoded'
-'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-'Cache-Control: max-age=0'
-'Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm'
-'Connection: keep-alive'
-'DNT: 1'
-</code></pre></div>
-<p>Presumably, they were checking for the presence of the Referer header but I didn&rsquo;t spend time trying to find that out.</p>
+<p>Trying a simple post request with curl without setting any of the headers failed with the site reporting <strong><em>“Access denied, pl. click here to visit the site”</em></strong>. To avoid that I tried doing the same by copying the entire post request using Chrome DevTools. And of course it worked that way. These were the headers used:</p>
 
-<h3 id="tools-for-the-job">Tools for the job</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>Origin: http://cbseresults.nic.in
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Cache-Control: max-age=0
+Referer: http://cbseresults.nic.in/class12/cbse122015_all.htm
+Connection: keep-alive
+DNT: 1
+</code></pre>
+</div>
 
-<p>Python was of course the language to be used. I decided against using Scrapy. Instead I decided to go with asyncio, BeautifulSoup4 and roll my own scraper. I&rsquo;ve been wanting to take a look at asyncio for some time now and haven&rsquo;t had the opportunity to use it on anything. I glanced through the post <a href="http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html">here</a> by Guido Van Rossum before proceeding (great post if any one wants to get into web scraping with Python).</p>
+<p>Presumably, they were checking for the presence of the Referer header but I didn’t spend time trying to find that out.</p>
+
+<p>###Tools for the job
+Python was of course the language to be used. I decided against using Scrapy. Instead I decided to go with asyncio, BeautifulSoup4 and roll my own scraper. I’ve been wanting to take a look at asyncio for some time now and haven’t had the opportunity to use it on anything. I glanced through the post <a href="http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html">here</a> by Guido Van Rossum before proceeding (great post if any one wants to get into web scraping with Python).</p>
 
 </article>
 

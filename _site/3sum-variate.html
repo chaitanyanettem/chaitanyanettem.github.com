@@ -92,7 +92,7 @@
 <article class="post-content">
   <p>The 3-Sum is a popular programming puzzle and is presented to people in many different forms. Here I will endeavor to dissect its more popular versions.</p>
 
-<h3 id="let-39-s-start-with-the-2-sum">Let&rsquo;s start with the 2-Sum</h3>
+<p>###Let’s start with the 2-Sum</p>
 
 <p>The question is thus:</p>
 
@@ -109,9 +109,10 @@
 <p>Output: index1 = 1, index2 = 2</p>
 </div>
 
-<p><br/>
+<p><br />
 Here you have an array of numbers and you have to find out if any two of them sum to a given target number. The most obvious way to solve it is to brute force your way to sum all possible combinations:</p>
-<div class="highlight"><pre><code class="language-C++" data-lang="C++">class Solution {
+
+<pre><code class="language-C++">class Solution {
 public:
     vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) {
         vector&lt;int&gt; solution;
@@ -124,16 +125,18 @@ public:
                 }
     }
 };
-</code></pre></div>
+</code></pre>
+
 <p>Obviously we can do better than that in terms of time. A better way is to use a hashtable/map. (This is something a professor once told me: When in doubt use a hashtable :).</p>
 
 <p>So, we can use a C++ map to store each number in the map when we first encounter it. Simultaneously we can check if the target minus that number already exists in the map. If it does, bingo!</p>
-<div class="highlight"><pre><code class="language-C++" data-lang="C++">class Solution {
+
+<pre><code class="language-C++">class Solution {
 public:
     vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) {
         map&lt;int, int&gt; hash;
         vector&lt;int&gt; result;
-
+        
         for (int i=0; i&lt;numbers.size(); i++) {
             if (hash.find(target - numbers[i]) != hash.end()) {
                 if (i + 1&lt; hash[target - numbers[i]]) {
@@ -151,8 +154,9 @@ public:
         return result;
     }
 };
-</code></pre></div>
-<p>To be continued&hellip;</p>
+</code></pre>
+<p>To be continued…</p>
+
 
 </article>
 
