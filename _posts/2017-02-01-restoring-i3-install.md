@@ -12,13 +12,16 @@ I've recently had to restore my i3-wm desktop from my home machine to a couple o
 - Install i3wm (Steps reproduced from [i3wm.org](https://i3wm.org/docs/repositories.html))
 ```bash
 echo "deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe" >> /etc/apt/sources.list
+
 apt-get update
+
 apt-get --allow-unauthenticated install sur5r-keyring
+
 apt-get update
+
 apt-get install i3
 ```
-
-Remember to use apt-get and not apt otherwise the ubuntu will refuse to accept the unauthenticated package.
+Remember to use apt-get and not apt otherwise ubuntu will refuse to accept the unauthenticated package.
 
 - Download any fonts that you need for your config. I use http://fontawesome.io/. Download the ttf and put it in a .fonts folder in the home folder.
 
@@ -29,7 +32,9 @@ Remember to use apt-get and not apt otherwise the ubuntu will refuse to accept t
 - Install numix theme (sudo apt install numix-gtk-theme) and numix icons:
 ```bash
 sudo apt-add-repository ppa:numix/ppa
+
 sudo apt update
+
 sudo apt install numix-icon-theme-circle
 ```
 
